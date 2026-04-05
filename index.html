@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body{font-family:Arial;padding:20px;background:#f5f7fb;}
+.container{max-width:900px;margin:auto;}
+.title{font-size:24px;font-weight:bold;margin-bottom:10px;}
+.subtitle{margin-bottom:20px;}
+
+.dropdown{background:white;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.1);margin-bottom:18px;}
+.dropdown summary{cursor:pointer;padding:18px;font-weight:bold;color:#1a73e8;}
+
+.card{background:#fafafa;padding:18px;border-radius:10px;margin-top:10px;}
+.section-title{font-weight:bold;margin-bottom:10px;color:#1a73e8;}
+
+.indicator{margin-bottom:10px;}
+.label{font-size:14px;margin-bottom:4px;}
+
+.progress{background:#e0e0e0;border-radius:20px;height:18px;overflow:hidden;}
+.progress-bar{height:100%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:bold;color:white;}
+
+.green{background:#4caf50;}
+.yellow{background:#ffc107;color:black;}
+.red{background:#f44336;}
+.purple{background:#7e57c2;}
+.teal{background:#009688;}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+<div class="title">Monitoring Kertas Kerja</div>
+<div class="subtitle">Aplikasi : <b>ABCD</b></div>
+
+<!-- KETUA -->
+<details class="dropdown">
+<summary>Monitoring Ketua Tim</summary>
+<div class="card">
+<div class="section-title">Ketua Tim - Overall</div>
+<div class="progress"><div class="progress-bar purple" id="ketua-overall">0%</div></div>
+</div>
+
+<div class="card">
+<div class="section-title">Aplikasi</div>
+
+<div class="indicator"><div class="label">Analisis Kebutuhan</div><div class="progress"><div class="progress-bar"></div></div></div>
+<div class="indicator"><div class="label">Perencanaan</div><div class="progress"><div class="progress-bar"></div></div></div>
+<div class="indicator"><div class="label">Rancang Bangun</div><div class="progress"><div class="progress-bar"></div></div></div>
+<div class="indicator"><div class="label">Implementasi</div><div class="progress"><div class="progress-bar"></div></div></div>
+<div class="indicator"><div class="label">Uji Kelaikan</div><div class="progress"><div class="progress-bar"></div></div></div>
+<div class="indicator"><div class="label">Pemeliharaan</div><div class="progress"><div class="progress-bar"></div></div></div>
+<div class="indicator"><div class="label">Evaluasi</div><div class="progress"><div class="progress-bar"></div></div></div>
+
+</div>
+
+<div class="card">
+<div class="section-title">Keamanan</div>
+
+<div class="indicator"><div class="label">Autentikasi</div><div class="progress"><div class="progress-bar"></div></div></div>
+<div class="indicator"><div class="label">Manajemen Sesi</div><div class="progress"><div class="progress-bar"></div></div></div>
+<div class="indicator"><div class="label">Kontrol Akses</div><div class="progress"><div class="progress-bar"></div></div></div>
+<div class="indicator"><div class="label">Kriptografi</div><div class="progress"><div class="progress-bar"></div></div></div>
+<div class="indicator"><div class="label">Pengendalian Kode Berbahaya</div><div class="progress"><div class="progress-bar"></div></div></div>
+<div class="indicator"><div class="label">Logika Bisnis</div><div class="progress"><div class="progress-bar"></div></div></div>
+<div class="indicator"><div class="label">File</div><div class="progress"><div class="progress-bar"></div></div></div>
+<div class="indicator"><div class="label">Keamanan API dan Web Service</div><div class="progress"><div class="progress-bar"></div></div></div>
+<div class="indicator"><div class="label">Keamanan Konfigurasi</div><div class="progress"><div class="progress-bar"></div></div></div>
+
+</div>
+</details>
+
+</div>
+
+<!-- SCRIPT CONNECT KE GOOGLE SHEETS -->
+<script>
+const API_URL = "https://script.google.com/macros/s/AKfycby8S-oXnmyhdKIise-s2ZSba68SYOJKatRBoupw0H22OaahZyw5rmSEAkj2-mLSKrTKig/exec";
+
+fetch(API_URL)
+.then(res => res.json())
+.then(data => {
+
+  let totalKetua = 0;
+  let countKetua = 0;
+
+  data.forEach(item => {
+    const sub = item.sub;
+    const nilai = Number(item.monitoring) * 100;
+
+    // isi indikator
+    document.querySelectorAll(".label").forEach(label => {
+      if(label.innerText.trim() === sub){
+        const bar = label.nextElementSibling.querySelector(".progress-bar");
+
+        bar.style.width = nilai + "%";
+        bar.innerText = Math.round(nilai) + "%";
+
+        bar.classList.remove("green","yellow","red");
+        if(nilai >= 80) bar.classList.add("green");
+        else if(nilai >= 60) bar.classList.add("yellow");
+        else bar.classList.add("red");
+      }
+    });
+
+    // hitung overall ketua
+    if(item.role === "Ketua" && item.sub !== "Overall"){
+      totalKetua += nilai;
+      countKetua++;
+    }
+
+  });
+
+  // tampilkan overall ketua
+  const overall = Math.round(totalKetua / countKetua);
+  const bar = document.getElementById("ketua-overall");
+
+  bar.style.width = overall + "%";
+  bar.innerText = overall + "%";
+});
+</script>
+
+</body>
+</html>
