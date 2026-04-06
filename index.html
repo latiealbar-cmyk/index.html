@@ -7,62 +7,87 @@
 <style>
 body{
   font-family: Arial;
-  background:#f5f7fb;
   padding:20px;
+  background:#f5f7fb;
 }
 
 .container{
   max-width:900px;
   margin:auto;
-  background:white;
-  padding:20px;
-  border-radius:12px;
-  box-shadow:0 2px 10px rgba(0,0,0,0.1);
 }
 
-h2{
+.title{
+  font-size:24px;
+  font-weight:bold;
   margin-bottom:20px;
 }
 
+.dropdown{
+  background:white;
+  border-radius:12px;
+  box-shadow:0 2px 8px rgba(0,0,0,0.1);
+  margin-bottom:15px;
+  overflow:hidden;
+}
+
+.sub-dropdown{
+  margin:10px;
+  border:1px solid #eee;
+  border-radius:10px;
+}
+
+summary{
+  cursor:pointer;
+  padding:14px;
+  font-weight:bold;
+  color:#1a73e8;
+}
+
+.card{
+  padding:15px;
+}
+
 .label{
-  margin-top:15px;
-  font-weight:500;
+  font-size:14px;
+  margin-top:10px;
 }
 
 .progress{
   width:100%;
   background:#e0e0e0;
   border-radius:20px;
-  height:20px;
+  height:18px;
   overflow:hidden;
-  margin-top:5px;
+  margin-top:4px;
 }
 
 .progress-bar{
   height:100%;
-  border-radius:20px;
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:12px;
+  font-size:11px;
   font-weight:bold;
   color:white;
-  transition:0.3s;
-  min-width:40px;
+  border-radius:20px;
+  min-width:35px;
+  transition:all 0.25s ease;
+  transform-origin:left;
 }
 
+/* hover effect */
+.progress:hover .progress-bar{
+  transform:scale(1.03,1.3);
+  filter:brightness(1.1);
+  box-shadow:0 4px 12px rgba(0,0,0,0.25);
+}
+
+/* warna */
 .green{background:#4caf50;}
-.yellow{background:#ffc107;color:black;}
+.yellow{background:#ff9800;}
 .red{background:#f44336;}
-
-.overall-box{
-  margin-bottom:25px;
-}
-
-.overall-title{
-  font-weight:bold;
-  margin-bottom:5px;
-}
+.purple{background:#7e57c2;}
+.teal{background:#009688;}
 </style>
 
 </head>
@@ -70,38 +95,161 @@ h2{
 <body>
 
 <div class="container">
+<div class="title">Monitoring Kertas Kerja</div>
 
-<h2>Monitoring Ketua Tim</h2>
+<!-- ================= KETUA ================= -->
+<details class="dropdown">
+<summary>Ketua Tim</summary>
 
-<!-- OVERALL -->
-<div class="overall-box">
-  <div class="overall-title">Overall</div>
-  <div class="progress">
-    <div class="progress-bar" id="ketua-overall">0%</div>
-  </div>
-</div>
+<div class="card">
 
-<!-- APLIKASI -->
+<details class="sub-dropdown">
+<summary>Aplikasi</summary>
+<div class="card">
+
+<div class="label">Overall</div>
+<div class="progress"><div class="progress-bar purple" id="ketua-app-overall"></div></div>
+
 <div class="label">Analisis Kebutuhan</div>
-<div class="progress"><div class="progress-bar"></div></div>
+<div class="progress"><div class="progress-bar ketua-app" data-sub="analisis kebutuhan"></div></div>
 
 <div class="label">Perencanaan</div>
-<div class="progress"><div class="progress-bar"></div></div>
+<div class="progress"><div class="progress-bar ketua-app" data-sub="perencanaan"></div></div>
 
 <div class="label">Rancang Bangun</div>
-<div class="progress"><div class="progress-bar"></div></div>
+<div class="progress"><div class="progress-bar ketua-app" data-sub="rancang bangun"></div></div>
 
 <div class="label">Implementasi</div>
-<div class="progress"><div class="progress-bar"></div></div>
+<div class="progress"><div class="progress-bar ketua-app" data-sub="implementasi"></div></div>
 
 <div class="label">Uji Kelaikan</div>
-<div class="progress"><div class="progress-bar"></div></div>
+<div class="progress"><div class="progress-bar ketua-app" data-sub="uji kelaikan"></div></div>
 
 <div class="label">Pemeliharaan</div>
-<div class="progress"><div class="progress-bar"></div></div>
+<div class="progress"><div class="progress-bar ketua-app" data-sub="pemeliharaan"></div></div>
 
 <div class="label">Evaluasi</div>
-<div class="progress"><div class="progress-bar"></div></div>
+<div class="progress"><div class="progress-bar ketua-app" data-sub="evaluasi"></div></div>
+
+</div>
+</details>
+
+<details class="sub-dropdown">
+<summary>Keamanan</summary>
+<div class="card">
+
+<div class="label">Overall</div>
+<div class="progress"><div class="progress-bar purple" id="ketua-sec-overall"></div></div>
+
+<div class="label">Autentikasi</div>
+<div class="progress"><div class="progress-bar ketua-sec" data-sub="autentikasi"></div></div>
+
+<div class="label">Manajemen Sesi</div>
+<div class="progress"><div class="progress-bar ketua-sec" data-sub="manajemen sesi"></div></div>
+
+<div class="label">Kontrol Akses</div>
+<div class="progress"><div class="progress-bar ketua-sec" data-sub="kontrol akses"></div></div>
+
+<div class="label">Kriptografi</div>
+<div class="progress"><div class="progress-bar ketua-sec" data-sub="kriptografi"></div></div>
+
+<div class="label">Pengendalian Kode Berbahaya</div>
+<div class="progress"><div class="progress-bar ketua-sec" data-sub="pengendalian kode berbahaya"></div></div>
+
+<div class="label">Logika Bisnis</div>
+<div class="progress"><div class="progress-bar ketua-sec" data-sub="logika bisnis"></div></div>
+
+<div class="label">File</div>
+<div class="progress"><div class="progress-bar ketua-sec" data-sub="file"></div></div>
+
+<div class="label">Keamanan API dan Web Service</div>
+<div class="progress"><div class="progress-bar ketua-sec" data-sub="keamanan api dan web service"></div></div>
+
+<div class="label">Keamanan Konfigurasi</div>
+<div class="progress"><div class="progress-bar ketua-sec" data-sub="keamanan konfigurasi"></div></div>
+
+</div>
+</details>
+
+</div>
+</details>
+
+<!-- ================= ANGGOTA ================= -->
+<details class="dropdown">
+<summary>Anggota Tim</summary>
+
+<div class="card">
+
+<details class="sub-dropdown">
+<summary>Aplikasi</summary>
+<div class="card">
+
+<div class="label">Overall</div>
+<div class="progress"><div class="progress-bar teal" id="anggota-app-overall"></div></div>
+
+<div class="label">Analisis Kebutuhan</div>
+<div class="progress"><div class="progress-bar anggota-app" data-sub="analisis kebutuhan"></div></div>
+
+<div class="label">Perencanaan</div>
+<div class="progress"><div class="progress-bar anggota-app" data-sub="perencanaan"></div></div>
+
+<div class="label">Rancang Bangun</div>
+<div class="progress"><div class="progress-bar anggota-app" data-sub="rancang bangun"></div></div>
+
+<div class="label">Implementasi</div>
+<div class="progress"><div class="progress-bar anggota-app" data-sub="implementasi"></div></div>
+
+<div class="label">Uji Kelaikan</div>
+<div class="progress"><div class="progress-bar anggota-app" data-sub="uji kelaikan"></div></div>
+
+<div class="label">Pemeliharaan</div>
+<div class="progress"><div class="progress-bar anggota-app" data-sub="pemeliharaan"></div></div>
+
+<div class="label">Evaluasi</div>
+<div class="progress"><div class="progress-bar anggota-app" data-sub="evaluasi"></div></div>
+
+</div>
+</details>
+
+<details class="sub-dropdown">
+<summary>Keamanan</summary>
+<div class="card">
+
+<div class="label">Overall</div>
+<div class="progress"><div class="progress-bar teal" id="anggota-sec-overall"></div></div>
+
+<div class="label">Autentikasi</div>
+<div class="progress"><div class="progress-bar anggota-sec" data-sub="autentikasi"></div></div>
+
+<div class="label">Manajemen Sesi</div>
+<div class="progress"><div class="progress-bar anggota-sec" data-sub="manajemen sesi"></div></div>
+
+<div class="label">Kontrol Akses</div>
+<div class="progress"><div class="progress-bar anggota-sec" data-sub="kontrol akses"></div></div>
+
+<div class="label">Kriptografi</div>
+<div class="progress"><div class="progress-bar anggota-sec" data-sub="kriptografi"></div></div>
+
+<div class="label">Pengendalian Kode Berbahaya</div>
+<div class="progress"><div class="progress-bar anggota-sec" data-sub="pengendalian kode berbahaya"></div></div>
+
+<div class="label">Logika Bisnis</div>
+<div class="progress"><div class="progress-bar anggota-sec" data-sub="logika bisnis"></div></div>
+
+<div class="label">File</div>
+<div class="progress"><div class="progress-bar anggota-sec" data-sub="file"></div></div>
+
+<div class="label">Keamanan API dan Web Service</div>
+<div class="progress"><div class="progress-bar anggota-sec" data-sub="keamanan api dan web service"></div></div>
+
+<div class="label">Keamanan Konfigurasi</div>
+<div class="progress"><div class="progress-bar anggota-sec" data-sub="keamanan konfigurasi"></div></div>
+
+</div>
+</details>
+
+</div>
+</details>
 
 </div>
 
@@ -112,56 +260,64 @@ fetch(API_URL)
 .then(res => res.json())
 .then(data => {
 
-  let totalKetua = 0;
-  let countKetua = 0;
-
   data.forEach(item => {
 
-    if(item.role !== "Ketua") return;
-
     const sub = item.sub.toLowerCase().trim();
+    const kategori = item.kategori.toLowerCase();
+    const role = item.role.toLowerCase();
     const nilai = Number(item.monitoring) * 100;
 
-    // isi indikator
-    document.querySelectorAll(".label").forEach(label => {
+    if(role === "ketua" && kategori === "aplikasi"){
+      if(sub === "overall") updateSingle("#ketua-app-overall", nilai);
+      else updateBar(".ketua-app", sub, nilai);
+    }
 
-      const textLabel = label.innerText.toLowerCase().trim();
+    if(role === "ketua" && kategori === "keamanan"){
+      if(sub === "overall") updateSingle("#ketua-sec-overall", nilai);
+      else updateBar(".ketua-sec", sub, nilai);
+    }
 
-      if(textLabel === sub){
+    if(role === "anggota" && kategori === "aplikasi"){
+      if(sub === "overall") updateSingle("#anggota-app-overall", nilai);
+      else updateBar(".anggota-app", sub, nilai);
+    }
 
-        const bar = label.nextElementSibling.querySelector(".progress-bar");
-
-        bar.style.width = nilai + "%";
-        bar.innerText = nilai.toFixed(2) + "%";
-
-        bar.classList.remove("green","yellow","red");
-
-        if(nilai >= 80) bar.classList.add("green");
-        else if(nilai >= 60) bar.classList.add("yellow");
-        else bar.classList.add("red");
-      }
-    });
-
-    // hitung overall
-    if(item.sub !== "Overall"){
-      totalKetua += nilai;
-      countKetua++;
+    if(role === "anggota" && kategori === "keamanan"){
+      if(sub === "overall") updateSingle("#anggota-sec-overall", nilai);
+      else updateBar(".anggota-sec", sub, nilai);
     }
 
   });
 
-  // tampilkan overall
-  const overall = totalKetua / countKetua;
+  function updateBar(className, sub, nilai){
+    document.querySelectorAll(className).forEach(bar=>{
+      const target = bar.getAttribute("data-sub");
+      if(target === sub){
+        bar.style.width = nilai + "%";
+        bar.innerText = nilai.toFixed(2) + "%";
+        setColor(bar, nilai);
+      }
+    });
+  }
 
-  const bar = document.getElementById("ketua-overall");
-  bar.style.width = overall + "%";
-  bar.innerText = overall.toFixed(2) + "%";
+  function updateSingle(id, nilai){
+    const bar = document.querySelector(id);
+    bar.style.width = nilai + "%";
+    bar.innerText = nilai.toFixed(2) + "%";
+    setColor(bar, nilai);
+  }
 
-  bar.classList.remove("green","yellow","red");
+  function setColor(bar, nilai){
+    bar.classList.remove("green","yellow","red");
 
-  if(overall >= 80) bar.classList.add("green");
-  else if(overall >= 60) bar.classList.add("yellow");
-  else bar.classList.add("red");
+    if(nilai >= 80){
+      bar.classList.add("green");
+    } else if(nilai >= 50){
+      bar.classList.add("yellow");
+    } else {
+      bar.classList.add("red");
+    }
+  }
 
 });
 </script>
